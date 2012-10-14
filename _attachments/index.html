@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example CouchApp</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+  </head>
+  <body>
+    <div id="account"></div>
+
+    <h1>Example CouchApp</h1>
+
+    <div id="profile">
+    </div>
+    <div id="content">
+    	<form name="form" id="form" action="">
+    	<table>
+    		<tr>
+    			<td>Title</td>
+    			<td><input type="text" name="title" id="title" value=""/>
+    		</tr>
+    	</table>
+    	<input type="submit" name="submit" class="submit" value="Send"/>
+    	</form>
+    </div>
+
+    <div id="sidebar">
+    </div>
+  </body>
+  <script src="/_utils/script/sha1.js"></script>
+  <script src="/_utils/script/json2.js"></script>
+  <script src="/_utils/script/jquery.js"></script>
+  <script src="/_utils/script/jquery.couch.js"></script>
+  <script src="vendor/couchapp/jquery.couchLogin.js"></script>
+  <script src="vendor/couchapp/jquery.couchProfile.js"></script>
+  <script src="vendor/couchapp/md5.js"></script>
+  <script src="vendor/couchapp/jquery.mustache.js"></script>
+  <script>
+  	db = $.couch.db("formulaire-test");
+  	function updateposts(){
+  		db.view("formulaire-test/posts", {
+  			success: function(data){
+  				for(i in data.rows){
+  					$("#sidebar").append(data.rows[i].value.title);
+  				}
+  			}
+  		});
+  	}
+  </script>
+  <script>
+  	$("input.submit").live('click', function(event) {
+  		var form = $(event.target).parents("form#form");
+  		
+  		docu = new Object;
+  		docu.title = form.find("input#title").val();
+  		
+  		db.saveDoc(
+  			{title: docu.title},
+  			{success: function(){
+  				updateposts();
+  				alert(docu.title);
+  			}}
+  		);
+  		return false;
+  	});
+  	
+  </script>
+
+
+</html>
