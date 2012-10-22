@@ -1,5 +1,5 @@
 function(doc) {
  	if(doc.title){
- 		emit(doc.title,doc)
+ 		emit(doc._id,doc.title)
  	} 
 }

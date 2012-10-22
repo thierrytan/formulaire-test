@@ -40,7 +40,7 @@
   		db.view("formulaire-test/posts", {
   			success: function(data){
   				for(i in data.rows){
-  					$("#sidebar").append(data.rows[i].value.title);
+  					$("#sidebar").append(data.rows[i].value);
   				}
   			}
   		});
