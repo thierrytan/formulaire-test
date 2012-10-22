@@ -9,6 +9,7 @@ function(head, req) {
   while (row = getRow()) {
     data.posts.push({
       order: ++i,
+      id: row.id,
       title: row.value,
     });
   }

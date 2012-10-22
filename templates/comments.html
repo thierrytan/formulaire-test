@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <h1>Comments: {{post}}</h1>
+    <ol>
+    {{#comments}}
+      <li>{{text}}</li>
+    {{/comments}}
+    </ol>
+    <form name="form" id="form" action="">
+    	<table>
+    		<tr>
+    			<td>New comment</td>
+    			<td><input type="text" name="comment" id="comment" value=""/>
+    		</tr>
+    	</table>
+    	<input type="submit" name="submit" class="submit" value="Send"/>
+    	</form>
+  </body>
+  <script>
+  	$("input.submit").live('click', function(event) {
+  		var form = $(event.target).parents("form#form");
+  		
+  		docu = new Object;
+  		docu.text = form.find("input#comment").val();
+  		
+  		db.saveDoc(
+  			{
+  				post_id: docu.text,
+  				post_name: docu.text, 
+  				text: docu.text,
+  				type: comment
+  			},
+  			{success: function(){
+  				alert(docu.text);
+  			}}
+  		);
+  		return false;
+  	});
+  	
+  </script>
+</html>

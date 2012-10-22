@@ -37,7 +37,7 @@
   <script>
   	db = $.couch.db("formulaire-test");
   	function updateposts(){
-  		db.view("formulaire-test/posts", {
+  		db.view('formulaire-test/posts"', {
   			success: function(data){
   				for(i in data.rows){
   					$("#sidebar").append(data.rows[i].value);
@@ -54,7 +54,7 @@
   		docu.title = form.find("input#title").val();
   		
   		db.saveDoc(
-  			{title: docu.title},
+  			{type : "post", title: docu.title},
   			{success: function(){
   				updateposts();
   				alert(docu.title);
