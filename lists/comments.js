@@ -4,6 +4,7 @@ function(head, req) {
   start({"headers":{"Content-Type":"text/html;charset=utf-8"}});
   var post_name = 'undefined';
   
+  
   var data = {
   	post: post_name,
     comments: []
